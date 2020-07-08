@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\fmt">
-      <UniqueIdentifier>{0c4a0d52-9a82-4d3f-9a16-c7500b15325c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\logging">
       <UniqueIdentifier>{1c69057d-6d08-43b0-90f1-f14b1a42e09b}</UniqueIdentifier>
     </Filter>
@@ -34,12 +31,6 @@
     </ClCompile>
     <ClCompile Include="singleton.cpp">
       <Filter>Source Files\battleye</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Sync\Programming\C++\Libraries\fmt\format.cc">
-      <Filter>Source Files\fmt</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\Sync\Programming\C++\Libraries\fmt\posix.cc">
-      <Filter>Source Files\fmt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +55,8 @@
     <ClInclude Include="emulator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

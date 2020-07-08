@@ -88,7 +88,7 @@ public:
 
 
 	// CONSOLE MODIFICATION FUNCTIONS
-	inline COORD get_position() const
+	[[nodiscard]] inline COORD get_position() const
 	{
 		CONSOLE_SCREEN_BUFFER_INFO info;
 		if (!GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info))
@@ -117,7 +117,7 @@ public:
 
 		// CLEAR LINE
 		DWORD count = 0;
-		const auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
+		auto* const handle = GetStdHandle(STD_OUTPUT_HANDLE);
 		auto result = FillConsoleOutputCharacter(handle, ' ', 150, position, &count);
 
 		// RESET POSITION

@@ -101,8 +101,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;BOTTLEYE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;BOTTLEYE_EXPORTS;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,8 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Sync\Programming\C++\Libraries\fmt\format.cc" />
-    <ClCompile Include="D:\Sync\Programming\C++\Libraries\fmt\posix.cc" />
     <ClCompile Include="delegate.cpp" />
     <ClCompile Include="emulator.cpp" />
     <ClCompile Include="entry.cpp" />
@@ -162,7 +161,17 @@
     <ClInclude Include="singleton.hpp" />
     <ClInclude Include="spinner.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\fmt.6.1.2\build\fmt.targets" Condition="Exists('..\packages\fmt.6.1.2\build\fmt.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\fmt.6.1.2\build\fmt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fmt.6.1.2\build\fmt.targets'))" />
+  </Target>
 </Project>
