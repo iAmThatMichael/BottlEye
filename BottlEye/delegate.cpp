@@ -25,7 +25,7 @@ void battleye::delegate::command(char* command)
 
 void battleye::delegate::received_packet(std::uint8_t* received_packet, std::uint32_t length)
 {
-	auto header = reinterpret_cast<battleye::be_packet*>(received_packet);
+	auto* const header = reinterpret_cast<battleye::be_packet*>(received_packet);
 
 	switch (header->id)
 	{
@@ -153,8 +153,8 @@ void battleye::delegate::respond(std::uint8_t response_index, std::initializer_l
 
 	const auto size = sizeof(battleye::be_packet_header) + sizeof(battleye::be_fragment::count) + data.size();
 
-	auto packet = std::make_unique<std::uint8_t[]>(size);
-	auto packet_buffer = packet.get();
+	const auto packet = std::make_unique<std::uint8_t[]>(size);
+	auto* const packet_buffer = packet.get();
 
 	packet_buffer[0] = (battleye::packet_id::RESPONSE);	// PACKET ID
 	packet_buffer[1] = (response_index - 1);			// RESPONSE INDEX
@@ -166,7 +166,7 @@ void battleye::delegate::respond(std::uint8_t response_index, std::initializer_l
 		packet_buffer[3 + i] = data.begin()[i];
 	}
 
-	battleye::delegate::o_send_packet(packet_buffer, size);
+	battleye::delegate::o_send_packet(packet_buffer, static_cast<uint32_t>(size));
 }
 
 void battleye::delegate::respond_fragmented(std::uint8_t response_index, battleye::be_fragment fragment, std::initializer_list<std::uint8_t> data)
@@ -180,8 +180,8 @@ void battleye::delegate::respond_fragmented(std::uint8_t response_index, battley
 		singleton::emulator.console().log_error("Sending too little fragment...");
 	}
 
-	auto packet = std::make_unique<std::uint8_t[]>(size);
-	auto packet_buffer = packet.get();
+	const auto packet = std::make_unique<std::uint8_t[]>(size);
+	auto* const packet_buffer = packet.get();
 
 	packet_buffer[0] = battleye::packet_id::RESPONSE;	// PACKET ID
 	packet_buffer[1] = response_index - 1;				// RESPONSE INDEX
@@ -194,5 +194,5 @@ void battleye::delegate::respond_fragmented(std::uint8_t response_index, battley
 	}
 
 	// DEBUG PRINT
-	battleye::delegate::o_send_packet(packet_buffer, size);
+	battleye::delegate::o_send_packet(packet_buffer, static_cast<uint32_t>(size));
 }

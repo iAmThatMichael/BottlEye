@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable : 4200)
 #include <cstdint>
 
 namespace battleye
@@ -40,7 +41,7 @@ namespace battleye
 			};
 		};
 
-		inline bool fragmented()
+		inline bool fragmented() const
 		{
 			return this->fragment.count != 0x00;
 		}
